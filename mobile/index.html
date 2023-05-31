@@ -1,0 +1,101 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: content: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+  <script src="components/loader.js"></script>
+  <link rel="stylesheet" href="components/loader.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="lib/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.css">
+ <link rel="stylesheet" href="css/themes/my-custom-theme.css" />
+  <script src="lib/jquery/jquery-1.12.4.min.js"></script>
+  <script src="lib/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>
+</head>
+
+<body data-gr-c-s-loaded="true" class="ui-mobile-viewport ui-overlay-a" style="" data-feedly-mini="yes">
+
+  <!-- LOGIN PAGE -->
+  <div data-role="page" id="loginpage">
+    <div data-role="header" role="banner" class="ui-header ui-bar-inherit">
+      <h1>Book Lovers App</h1>
+    </div><!-- /header -->
+    <div role="main" class="ui-content"><!-- /main section -->
+      <h2>Login</h2>
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required><br>
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required><br>
+      <input type="button" value="Submit" onClick="login();">
+      <p>admin@admin, password is password</p>
+      <p>clubadmin@clubadmin, password is password</p>
+      <p>member@member, password is password</p>
+    </div>
+  </div>
+  <!-- END LOGIN PAGE -->
+
+  <!-- MENU PAGE -->
+  <div data-role="page" id="menupage">
+    <div data-role="header" role="banner" class="ui-header ui-bar-inherit">
+      <h1>Book Lovers App</h1>
+    </div><!-- /header -->
+    <div role="main" class="ui-content"><!-- /main section -->
+    <h2>Menu</h2>
+      <p><a href="#meetingspage" data-direction="reverse" class="ui-btn ui-shadow ui-corner-all ui-btn-b">Book Club Meetings</a></p>
+      <p><a href="#findbookpage" data-direction="reverse" class="ui-btn ui-shadow ui-corner-all ui-btn-b">Find a Book</a></p>
+      <p><a href="#booklistpage" data-direction="reverse" class="ui-btn ui-shadow ui-corner-all ui-btn-b">Vote on Book List</a></p>
+    </div>
+  </div>
+  <!-- END MENU PAGE -->
+
+  <!-- MEETINGS PAGE --> <!-- user can see upcoming book meetings and the proposed book -->
+  <div data-role="page" id="meetingspage">
+    <div data-role="header" role="banner" class="ui-header ui-bar-inherit">
+      <h1>Book Lovers App</h1>
+    </div><!-- /header -->
+    <div role="main" class="ui-content"><!-- /main section -->
+      <h2>Book Club Meetings</h2>
+      <div id="meetings"></div> <!-- div to insert book club meetings -->
+      <p><a href="#menupage" data-direction="reverse" class="ui-btn ui-shadow ui-corner-all ui-btn-b">Menu</a></p>
+    </div>
+  </div>
+  <!-- END MEETINGS PAGE -->
+
+  <!-- FIND BOOK PAGE --> <!-- user finds a book and adds it to the book list -->
+  <div data-role="page" id="findbookpage">
+    <div data-role="header" role="banner" class="ui-header ui-bar-inherit">
+      <h1>Book Lovers App</h1>
+    </div><!-- /header -->
+    <div role="main" class="ui-content"><!-- /main section -->
+      <h2>Find a Book</h2>
+      <label for="book">Book Title:</label>
+      <input type="text" id="booktitle" name="booktitle"><br> 
+      <label for="book">Book Author: </label>
+      <input type="text" id="bookauthor" name="bookauthor"><br>
+      <label for="book">Genre: </label>
+      <input type="text" id="bookgenre" name="bookgenre"><br>
+      <div id="bookdata"></div>
+      <input type="button" name="findbook" value="Find Book" onclick="findbook()"> <!-- search the API -->
+      <p><a href="#menupage" data-direction="reverse" class="ui-btn ui-shadow ui-corner-all ui-btn-b">Menu</a></p>
+    </div>
+  </div>
+  <!-- END FIND BOOK -->
+
+  <!-- BOOK LIST PAGE --> <!-- user can see the clubs book list and votes on it -->
+  <div data-role="page" id="booklistpage">
+    <div data-role="header" role="banner" class="ui-header ui-bar-inherit">
+      <h1>Book Lovers App</h1>
+    </div><!-- /header -->
+    <div role="main" class="ui-content"><!-- /main section -->
+      <h2>Book Club Book List</h2>
+      <div id="booklist"></div>
+      <p><a href="#menupage" data-direction="reverse" class="ui-btn ui-shadow ui-corner-all ui-btn-b">Menu</a></p>
+    </div>
+  </div>
+  <!-- END FIND BOOK -->
+
+  <script src='lib/new_ajax_helper.js'></script>
+  <script src='lib/myscripts.js'></script>
+</body>
+</html>
