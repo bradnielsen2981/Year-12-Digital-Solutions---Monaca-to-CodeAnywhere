@@ -1,0 +1,28 @@
+#get a message, a shift each letter in the message by a fixed amount
+
+#function to find the place of the letter
+BEGIN FindPlace(letter)
+    FOR index = 0 to 25
+        IF letter = alphabet[index]
+            RETURN index
+        END IF
+    END FOR
+    RETURN ERROR ("no letter found")
+END
+
+BEGIN
+    SET alphabet = 'abcdefghijklmnopqrstuvwxyz'
+    INPUT message 
+    INPUT SHIFT
+    SET newmessage = ''
+    FOR letter IN message
+        IF letter NOT in alphabet
+            newmessage = newmessage + letter
+        ELSE
+            SET place = FindPlace(letter)
+            SET new_place = place + shift % LENGTH(alphabet)
+            newmessage = newmessage + alphabet[new_place]
+        END IF
+    END FOR
+    OUTPUT newmessage
+END
