@@ -9,7 +9,7 @@
 Each character in the message is shifted by the shift represented by the letter in the key. When you reach the end of the key, you go back to the start.
 
 key = 'cat' =   [3, 0, 19]
-message = dogs are great
+message = dogs are great!
 
 d + 3, o + 0, g + 19     s + 3 a + 0  
 
@@ -17,13 +17,12 @@ ONE TIME PAD CIPHER
 
 BEGIN Place(letter)   #d
     //find the place of the letter
-    SET place
     FOR index = 0 to LENGTH(alphabet) 
         IF alphabet[index] = letter THEN
             RETURN index
         END IF
     END FOR
-END RETURN place
+END PLACE
 
 BEGIN
     SET alphabet = 'abcdefghijklmnopqrstuvwxyz'
@@ -40,4 +39,41 @@ BEGIN
         newmessage = newmessage + newletter
         position = position + 1
     END FOR
+
+    OUTPUT newmessage
 END
+
+
+----------------------------------
+VIGENERE CIPHER
+
+
+
+
+---------------------------------
+PRIME NUMBER FINDER
+
+BEGIN
+    INPUT number
+    
+    //find all the numbers between 2 and number that are PRIME
+    primenumberlist = [2]
+
+    FOR num = 3 to number
+
+        ISPRIME = True
+        FOR number in primenumberlist
+            IF num % number == 0
+                ISPRIME = False
+                BREAK
+            ENDIF
+        END
+        IF ISPRIME = True
+            ADD num to primenumberlist
+        END IF
+    END FOR
+
+    OUTPUT primenumberlist
+END
+
+
