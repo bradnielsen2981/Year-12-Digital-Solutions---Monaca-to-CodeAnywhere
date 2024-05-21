@@ -1,0 +1,19 @@
+body {
+    background-image:url('/css/themes/microphone.jpg') !important;
+    background-size: cover;
+    background-position: 25% 75%;
+}
+
+.ui-page { 
+  background: transparent;
+}
+
+.ui-content{
+    background: transparent;
+}
+
+h1 { 
+    text-overflow:initial !important;
+}
+
+.helptext { color:yellow; font-style: italic; }
