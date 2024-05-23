@@ -310,23 +310,22 @@ def test():
 
 #TOKEN
 #login page
-#login page
 @app.route('/mobilelogin', methods=["GET","POST"])
 @cross_origin()
 def mobilelogin():
     app.logger.info("Mobile Login")
     data = {}
 
-    request.method = 'POST' #TESTING PURPOSE
-
     if request.method == "POST":
-        email = 'admin@admin' #email = request.form['email']
-        password = 'admin' #password = request.form['password']
+        email = request.form['email']
+        password = request.form['password']
 
         results = DATABASE.ViewQuery("SELECT * FROM users WHERE email = ?", (email,))
         if results:
             userdetails = results[0] #row in the user table (Python Dictionary)
             if check_password(userdetails['password'], password):
+
+                #create a token using simple hash function and save that 
 
                 data['userid'] = userdetails['userid']
                 data['permission'] = userdetails['permission']

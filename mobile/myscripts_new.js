@@ -12,16 +12,14 @@ function login()
     email = document.getElementById('email').value;
     password = document.getElementById('password').value;
 
-    //validate input
-    if (email == "" || password == "")
+    if (email == '' || password == '')
     {
         return;
     }
-    if (!email.includes('@')) {
-        alert('Please enter a valid email address.');
+    if (!email.includes('@'))
+    {
         return;
     }
-
 
     var formobject = new FormData(); 
     formobject.append("email", email);
@@ -39,10 +37,9 @@ function receivelogin(response)
         userid = response.userid;
         permission = response.permission;
 
-        $.mobile.changePage( "#menupage", { transition: "flip" });
+        $.mobile.changePage( "#menupage", { transition: "flip" }); 
 
-    } else
-    {
+    } else {
         alert(response.message);
     }
 }
