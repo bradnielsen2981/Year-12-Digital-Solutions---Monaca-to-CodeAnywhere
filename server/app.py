@@ -287,18 +287,28 @@ def exit():
     func()
     return jsonify({'message':'Exiting'})
 
-@app.route('/songsearch/<query>')
-def songsearch(query):
-    url = "https://spotify23.p.rapidapi.com/search/"
-    querystring = {"q":query,"type":"multi","offset":"0","limit":"5","numberOfTopResults":"5"}
-    headers = {
-        "X-RapidAPI-Key": "63a6d49d67mshf59bc1bb51752acp169684jsnd91195bff2b6",
-        "X-RapidAPI-Host": "spotify23.p.rapidapi.com"
-    }
-    response = requests.get(url, headers=headers, params=querystring)
-    dictionary = response.json()
-    album = dictionary['albums']['items'][0]
-    return jsonify(album)
+@app.route('/songsearch', methods=["GET","POST"])
+@cross_origin()
+def songsearch():
+
+    data = {}
+    request.method = 'POST'
+
+    if request.method == 'POST':
+
+        songtitle = 'Black or White'
+        songartist = 'Michael Jackson'
+
+        url = "https://spotify23.p.rapidapi.com/search/"
+        querystring = {"q":songtitle,"type":"multi","offset":"0","limit":"5","numberOfTopResults":"5"}
+        headers = {
+            "X-RapidAPI-Key": "63a6d49d67mshf59bc1bb51752acp169684jsnd91195bff2b6",
+            "X-RapidAPI-Host": "spotify23.p.rapidapi.com"
+        }
+        response = requests.get(url, headers=headers, params=querystring)
+        dictionary = response.json()
+        data = dictionary['albums']['items'][0]
+    return jsonify(data)
 
 
 @app.route('/test')
