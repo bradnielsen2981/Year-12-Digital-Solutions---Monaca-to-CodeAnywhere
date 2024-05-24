@@ -5,6 +5,8 @@ var username = null;
 var permission = null;
 
 
+alert("Javascript loaded");
+
 function login()
 {
     alert("Login button clicked");
