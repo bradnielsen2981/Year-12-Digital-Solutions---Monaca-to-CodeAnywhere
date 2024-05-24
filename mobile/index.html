@@ -33,7 +33,7 @@
       <input type="email" id="email" name="email" required><br>
       <label for="password">Password:</label>
       <input type="password" id="password" name="password" required><br>
-      <input type="button" value="Submit" data-transition="flip" onClick="login();">
+      <input type="button" value="Submit" data-transition="flip" onclick="login();">
       <p class="helptext">admin@admin, password is admin</p>
       <a href="#menupage" data-transition="flip" class="ui-btn">Skip Login</a>
     </div>
@@ -89,14 +89,26 @@
       <h2>Search a song</h2>
       <label for="song">Song Title:</label>
       <input type="text" id="songtitle" name="songtitle"><br> 
-      <label for="song">song Author: </label>
-      <input type="text" id="songauthor" name="songauthor"><br>
+      <label for="song">Song Artist: </label>
+      <input type="text" id="songartist" name="songartist"><br>
       <div id="songdata"></div>
       <input type="button" name="searchsongbutton" value="Search song" onclick="searchsong()"> <!-- search the API -->
       <p><a href="#menupage"  data-transition="flip" data-direction="reverse" class="ui-btn">Menu</a></p>
     </div>
   </div>
   <!-- END SEARCH SONG -->
+
+
+   <div data-role="page" id="songresultspage">
+    <div data-role="header" role="banner" class="ui-header ui-bar-inherit">
+      <h1><i class="fa-regular fa-heart"></i> Karaoke Lovers</h1>
+    </div><!-- /header -->
+    <div role="main" class="ui-content"><!-- /main section -->
+      <h2>Song Results</h2>
+      <div id="songresults"></div>
+      <p><a href="#menupage"  data-transition="flip" data-direction="reverse" class="ui-btn">Menu</a></p>
+    </div>
+  </div>
 
   <!-- Playlist page --> <!-- user can see the clubs song list and votes on it -->
   <div data-role="page" id="playlistpage">

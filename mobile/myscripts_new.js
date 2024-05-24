@@ -45,3 +45,22 @@ function receivelogin(response)
 }
 
 
+
+function searchsong()
+{
+    alert("search song button clicked");
+
+    songtitle = document.getElementById('songtitle').value;
+    songartist = document.getElementById('songartist').value;
+
+    if (songtitle == '' || songartist == '')
+    {
+        return;
+    }
+
+    var formobject = new FormData(); 
+    formobject.append("songtitle", songtitle);
+    formobject.append("songartist", songartist);
+    new_ajax_helper('https://python-yellow-bear-bradnielsen702.codeanyapp.com/songsearch', receivesongresults, formobject,'POST');
+}
+
