@@ -287,27 +287,27 @@ def exit():
     func()
     return jsonify({'message':'Exiting'})
 
+
+
 @app.route('/songsearch', methods=["GET","POST"])
 @cross_origin()
 def songsearch():
-
     data = {}
     request.method = 'POST'
-
     if request.method == 'POST':
-
-        songtitle = 'Black or White'
-        songartist = 'Michael Jackson'
+        songtitle = 'Lucy in the sky with diamonds'
+        songartist = 'Beatles'
+        query = songtitle + " " + songartist
 
         url = "https://spotify23.p.rapidapi.com/search/"
-        querystring = {"q":songtitle,"type":"multi","offset":"0","limit":"5","numberOfTopResults":"5"}
+        querystring = {"q":query,"type":"multi","offset":"0","limit":"5","numberOfTopResults":"5"}
         headers = {
             "X-RapidAPI-Key": "63a6d49d67mshf59bc1bb51752acp169684jsnd91195bff2b6",
             "X-RapidAPI-Host": "spotify23.p.rapidapi.com"
         }
         response = requests.get(url, headers=headers, params=querystring)
         dictionary = response.json()
-        data = dictionary['albums']['items'][0]
+        data = dictionary['albums']['items']
     return jsonify(data)
 
 

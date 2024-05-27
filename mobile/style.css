@@ -1,3 +1,5 @@
+/**/
+
 body {
     background-image:url('/css/themes/microphone.jpg') !important;
     background-size: cover;
@@ -17,3 +19,19 @@ h1 {
 }
 
 .helptext { color:yellow; font-style: italic; }
+
+.song {
+    margin-bottom: 20px;
+    border: 1px solid grey;
+    padding: 10px;
+    border-radius: 5px;
+    background-color:rgba(100, 0, 200, 0.75);
+}
+.song img {
+    display: block;
+    margin-bottom: 10px;
+}
+.song button {
+    padding: 5px 10px;
+    cursor: pointer;
+}

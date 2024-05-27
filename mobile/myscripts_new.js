@@ -4,8 +4,7 @@ var userid = null;
 var username = null;
 var permission = null;
 
-
-alert("Javascript loaded");
+alert("Javascript linked");
 
 function login()
 {
@@ -55,14 +54,56 @@ function searchsong()
     songtitle = document.getElementById('songtitle').value;
     songartist = document.getElementById('songartist').value;
 
-    if (songtitle == '' || songartist == '')
-    {
-        return;
-    }
-
     var formobject = new FormData(); 
     formobject.append("songtitle", songtitle);
     formobject.append("songartist", songartist);
-    new_ajax_helper('https://python-yellow-bear-bradnielsen702.codeanyapp.com/songsearch', receivesongresults, formobject,'POST');
+
+    new_ajax_helper('https://python-yellow-bear-bradnielsen702.codeanyapp.com/songsearch', receivesongresults, formobject, 'POST');
+}
+
+function receivesongresults(response)
+{
+    alert("Received results");
+   
+    const songResults = document.getElementById('songresults');
+    songResults.innerHTML = " ";
+
+    response.forEach(item => {
+        const track = item.data;
+        const album = track.albumOfTrack;
+        const artist = track.artists.items[0].profile.name;
+        const coverArt = album.coverArt.sources[0].url;
+
+        const songDiv = document.createElement('div');
+        songDiv.classList.add('song');
+
+        const img = document.createElement('img');
+        img.src = coverArt;
+        img.alt = track.name;
+        img.width = 100;
+        img.height = 100;
+
+        const songName = document.createElement('h3');
+        songName.textContent = track.name;
+
+        const artistName = document.createElement('p');
+        artistName.textContent = `Artist: ${artist}`;
+
+        const button = document.createElement('button');
+        button.textContent = 'Add to Playlist';
+        button.dataset.trackId = track.id;
+        button.addEventListener('click', () => {
+        alert(`Track ID: ${track.id}`);
+        });
+
+        songDiv.appendChild(img);
+        songDiv.appendChild(songName);
+        songDiv.appendChild(artistName);
+        songDiv.appendChild(button);
+
+        songResults.appendChild(songDiv);
+    });
+
+    $.mobile.changePage( "#songresultspage", { transition: "flip" }); 
 }
 
