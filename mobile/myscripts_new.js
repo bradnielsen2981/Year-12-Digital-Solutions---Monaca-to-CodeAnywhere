@@ -3,8 +3,9 @@
 var userid = null;
 var username = null;
 var permission = null;
-
 var trackid = null;
+var eventid = null;
+var playlist = null;
 
 alert("Javascript linked");
 
@@ -121,3 +122,9 @@ function receivesongresults(response)
     $.mobile.changePage( "#songresultspage", { transition: "flip" }); 
 }
 
+//page load for playlist page
+$(document).on("pageshow","#playlistpage", function(){ 
+  
+    alert("Playlist page loading");
+
+});
