@@ -28,10 +28,12 @@ h1 {
     background-color:rgba(100, 0, 200, 0.75);
 }
 .song img {
-    display: block;
-    margin-bottom: 10px;
+    float: left;
+    margin-right: 20px;
+    margin-bottom: 20px;
 }
 .song button {
     padding: 5px 10px;
     cursor: pointer;
+    width:100%;
 }
