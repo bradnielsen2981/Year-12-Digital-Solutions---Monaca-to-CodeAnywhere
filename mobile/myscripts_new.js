@@ -4,6 +4,8 @@ var userid = null;
 var username = null;
 var permission = null;
 
+var trackid = null;
+
 alert("Javascript linked");
 
 function login()
@@ -66,7 +68,7 @@ function receivesongresults(response)
     alert("Received results");
    
     const songResults = document.getElementById('songresults');
-    songResults.innerHTML = " ";
+    songResults.innerHTML = "";
 
     response.forEach(item => {
         const track = item.data;
@@ -77,11 +79,18 @@ function receivesongresults(response)
         const songDiv = document.createElement('div');
         songDiv.classList.add('song');
 
+        // Create a link around the image
+        const link = document.createElement('a');
+        link.href = track.uri;
+        link.target = "_blank"; // Open link in a new tab
+        songDiv.appendChild(link);
+
         const img = document.createElement('img');
         img.src = coverArt;
         img.alt = track.name;
         img.width = 100;
         img.height = 100;
+        link.appendChild(img);
 
         const songName = document.createElement('h3');
         songName.textContent = track.name;
@@ -91,12 +100,17 @@ function receivesongresults(response)
 
         const button = document.createElement('button');
         button.textContent = 'Add to Playlist';
-        button.dataset.trackId = track.id;
+
+        button.dataset.trackid = track.id;
+        button.dataset.songtitle = track.name;
+        button.dataset.songartist = artist;
+
         button.addEventListener('click', () => {
-        alert(`Track ID: ${track.id}`);
+            alert(`Track ID: ${button.dataset.trackid}, Song Title: ${button.dataset.songtitle}, Artist: ${button.dataset.songartist}`);
+
+            $.mobile.changePage("#addtoplaylistpage", { transition: "flip" });
         });
 
-        songDiv.appendChild(img);
         songDiv.appendChild(songName);
         songDiv.appendChild(artistName);
         songDiv.appendChild(button);
