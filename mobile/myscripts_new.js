@@ -7,6 +7,29 @@ var trackid = null;
 var eventid = null;
 var playlist = null;
 
+var deviceready = null;
+
+//---DEVICE READY--------------
+document.addEventListener("deviceready", onDeviceReady, false);
+function onDeviceReady() {
+  isdeviceready = true;
+  checkGPS(); 
+}
+//send GPS coordinates to the server
+function checkGPS()
+{
+  if (isdeviceready) {
+    navigator.geolocation.getCurrentPosition(onGPSSuccess, onGPSError);
+  }
+}
+
+//save GPS coordinates globally
+function onGPSSuccess(position) {
+  longitude = position.coords.longitude;
+  latitude = position.coords.latitude;
+  alert("GPS coordinates received: Long: " + String(longitude) + " Lat: " + String(latitude)); 
+};
+
 alert("Javascript linked");
 
 function login()
