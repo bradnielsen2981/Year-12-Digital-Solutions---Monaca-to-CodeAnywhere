@@ -7,7 +7,7 @@ var trackid = null;
 var eventid = null;
 var playlist = null;
 
-var deviceready = null;
+var isdeviceready = null;
 
 //---DEVICE READY--------------
 document.addEventListener("deviceready", onDeviceReady, false);
