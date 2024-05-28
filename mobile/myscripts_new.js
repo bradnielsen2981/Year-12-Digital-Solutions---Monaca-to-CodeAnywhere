@@ -13,14 +13,7 @@ var deviceready = null;
 document.addEventListener("deviceready", onDeviceReady, false);
 function onDeviceReady() {
   isdeviceready = true;
-  checkGPS(); 
-}
-//send GPS coordinates to the server
-function checkGPS()
-{
-  if (isdeviceready) {
-    navigator.geolocation.getCurrentPosition(onGPSSuccess, onGPSError);
-  }
+  navigator.geolocation.getCurrentPosition(onGPSSuccess, onGPSError);
 }
 
 //save GPS coordinates globally
