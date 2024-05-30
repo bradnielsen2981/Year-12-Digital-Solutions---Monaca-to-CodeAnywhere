@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="components/loader.css">
   <link rel="stylesheet" href="lib/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.css">
+  <link rel="stylesheet" href="css/themes/jquery.mobile.icons.min.css" />
   <link rel="stylesheet" href="css/themes/my-custom-theme.css" />
   <link rel="stylesheet" href="css/style.css">
     
@@ -35,7 +36,7 @@
       <input type="password" id="password" name="password" required><br>
       <input type="button" value="Submit" data-transition="flip" onclick="login();">
       <p class="helptext">admin@admin, password is admin</p>
-      <a href="#menupage" data-transition="flip" class="ui-btn">Skip Login</a>
+      <a href="#registerpage" data-transition="flip" class="ui-btn">Register</a>
     </div>
   </div>
   <!-- END LOGIN PAGE -->
@@ -47,7 +48,6 @@
     </div><!-- /header -->
     <div role="main" class="ui-content"><!-- /main section -->
     <h2>Menu</h2>
-      <p><a href="#registerpage" data-transition="flip" class="ui-btn">Register</a></p>
       <p><a href="#eventspage" data-transition="flip" class="ui-btn">Karaoke Events</a></p>
       <p><a href="#searchsongpage" data-transition="flip" class="ui-btn">Search for a Song</a></p>
       <p><a href="#playlistpage" data-transition="flip" class="ui-btn">Playlist</a></p>
@@ -63,7 +63,7 @@
     <div role="main" class="ui-content"><!-- /main section -->
       <h2>Register</h2>
       <p>Please register</p>
-      <p><a href="#menupage"  data-transition="flip" data-direction="reverse" class="ui-btn">Menu</a></p>
+      <p><a href="#loginpage"  data-transition="flip" data-direction="reverse" class="ui-btn">Login</a></p>
     </div>
   </div>
 
@@ -91,8 +91,7 @@
       <input type="text" id="songtitle" name="songtitle"><br> 
       <label for="song">Song Artist: </label>
       <input type="text" id="songartist" name="songartist"><br>
-      <div id="songdata"></div>
-      <input type="button" name="searchsongbutton" value="Search song" onclick="searchsong()"> <!-- search the API -->
+      <input type="button" name="searchsongbutton" value="Search song" onclick="searchsong();"> <!-- search the API -->
       <p><a href="#menupage"  data-transition="flip" data-direction="reverse" class="ui-btn">Menu</a></p>
     </div>
   </div>
@@ -123,10 +122,30 @@
   </div>
   <!-- END PLAYLIST PAGE -->
 
+
+    <!-- SEARCH SONG PAGE --> <!-- user searchs a song and adds it to the song list -->
+  <div data-role="page" id="addtoplaylistpage">
+    <div data-role="header" role="banner" class="ui-header ui-bar-inherit">
+      <h1><i class="fa-regular fa-heart"></i> Karaoke Lovers App</h1>
+    </div><!-- /header -->
+    <div role="main" class="ui-content"><!-- /main section -->
+      <h2>Add to Playlist</h2>
+      <label for="song">Song Title:</label>
+      <input type="text" id="playlistsongtitle" name="songtitle"><br> 
+      <label for="artist">Song Artist: </label>
+      <input type="text" id="playlistsongartist" name="songartist"><br>
+      <label for="performer">Performers: </label>
+      <input type="text" id="performers" name="performers"><br>
+
+      <input type="button" name="addtoplaylistbutton" value="Add to Playlist" onclick="addtoplaylist();"> <!-- search the API -->
+      <p><a href="#menupage"  data-transition="flip" data-direction="reverse" class="ui-btn">Menu</a></p>
+    </div>
+  </div>
+  <!-- END SEARCH SONG -->
+
   <script src='lib/new_ajax_helper.js'></script>
   <script src='lib/myscript.js'></script>
   
-
 </body>
 
 </html>

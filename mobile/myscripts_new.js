@@ -23,7 +23,11 @@ function onGPSSuccess(position) {
   alert("GPS coordinates received: Long: " + String(longitude) + " Lat: " + String(latitude)); 
 };
 
-alert("Javascript linked");
+function onGPSError(position)
+{
+    console.log("Error");
+}
+
 
 function login()
 {
@@ -124,6 +128,11 @@ function receivesongresults(response)
 
         button.addEventListener('click', () => {
             alert(`Track ID: ${button.dataset.trackid}, Song Title: ${button.dataset.songtitle}, Artist: ${button.dataset.songartist}`);
+            document.getElementById("playlistsongtitle").value = button.dataset.songtitle;
+            document.getElementById("playlistsongartist").value = button.dataset.songartist;
+
+            //SAVE THE TRACK ID GLOBALLY - you will need this for other api functionality
+            trackid = button.dataset.trackid;
 
             $.mobile.changePage("#addtoplaylistpage", { transition: "flip" });
         });
@@ -139,8 +148,20 @@ function receivesongresults(response)
 }
 
 //page load for playlist page
+$(document).on("pageshow","#eventspage", function(){ 
+  
+    alert("Event page loading");
+    //contact the server and get the current events
+
+    //allow the user to choose their event 
+    //SAVE THE EVENTID GLOBALLY IN JAVASCRIPT
+
+});
+
+//page load for playlist page
 $(document).on("pageshow","#playlistpage", function(){ 
   
     alert("Playlist page loading");
+    //contact the server and get the playlist results for the current EVENTID
 
 });
