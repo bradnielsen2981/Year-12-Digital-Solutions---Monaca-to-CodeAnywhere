@@ -1,167 +1,74 @@
 // This is a JavaScript file
-//GLOBAL VARIABLES
-var userid = null;
-var username = null;
-var permission = null;
-var trackid = null;
-var eventid = null;
-var playlist = null;
 
+userid = null;
+username = null;
+permission = null;
+lat = 27.4698; // Brisbane
+long = 153.0251; // Brisbane
+
+// GET LONG AND LAT COORDINATES FROM MOBILE - need Location Services on and allowed
 var isdeviceready = false;
-
-//---DEVICE READY--------------
 document.addEventListener("deviceready", onDeviceReady, false);
 function onDeviceReady() {
   isdeviceready = true;
-  navigator.geolocation.getCurrentPosition(onGPSSuccess, onGPSError);
+  navigator.geolocation.getCurrentPosition(onGPSSuccess, onGPSError); //JQUERY MOBILE
 }
-
-//save GPS coordinates globally
 function onGPSSuccess(position) {
-  longitude = position.coords.longitude;
-  latitude = position.coords.latitude;
-  alert("GPS coordinates received: Long: " + String(longitude) + " Lat: " + String(latitude)); 
+  long = position.coords.longitude;
+  lat = position.coords.latitude;
+  alert("GPS coordinates received: Long: " + String(long) + " Lat: " + String(lat)); 
 };
-
 function onGPSError(position)
 {
     console.log("Error");
 }
 
-
+// LOGIN CODE
+document.getElementById('loginbutton').onclick = login;
 function login()
 {
     alert("Login button clicked");
-
     email = document.getElementById('email').value;
     password = document.getElementById('password').value;
-
-    if (email == '' || password == '')
-    {
-        return;
-    }
-    if (!email.includes('@'))
-    {
-        return;
-    }
-
     var formobject = new FormData(); 
     formobject.append("email", email);
     formobject.append("password", password);
-    new_ajax_helper('https://python-yellow-bear-bradnielsen702.codeanyapp.com/mobilelogin', receivelogin, formobject,'POST');
+    new_ajax_helper('https://bradnielsen.pythonanywhere.com/login', receivelogin, formobject,'POST');
 }
-
-//JSON is turned into an OBJECT when it comes
 function receivelogin(response)
 {
-    if (response.status == 'success')
+    alert(response.message);
+
+    if (response.success == true)
     {
-        alert("Welcome " + response.name);
-        username = response.name;
         userid = response.userid;
+        username = response.username;
         permission = response.permission;
 
         $.mobile.changePage( "#menupage", { transition: "flip" }); 
-
-    } else {
-        alert(response.message);
     }
 }
 
-
-
-function searchsong()
+//On load of chart search page - query the api
+$(document).on("pageshow","#chartsearchpage", chartsearch); 
+function chartsearch()
 {
-    alert("search song button clicked");
-
-    songtitle = document.getElementById('songtitle').value;
-    songartist = document.getElementById('songartist').value;
-
+    alert("HERE");
     var formobject = new FormData(); 
-    formobject.append("songtitle", songtitle);
-    formobject.append("songartist", songartist);
+    formobject.append("long", long);
+    formobject.append("lat", lat);
 
-    new_ajax_helper('https://python-yellow-bear-bradnielsen702.codeanyapp.com/songsearch', receivesongresults, formobject, 'POST');
+    new_ajax_helper('https://bradnielsen.pythonanywhere.com/chartsearch', receivechart, formobject,'POST');
 }
-
-function receivesongresults(response)
+function receivechart(response)
 {
-    alert("Received results");
-   
-    const songResults = document.getElementById('songresults');
-    songResults.innerHTML = "";
+    image = response.data.imageUrl;
+    alert(image);
+    imgtag = document.createElement('img');
+    imgtag.src = image;
+    imgtag.width = 300;
+    imgtag.height = 300;
 
-    response.forEach(item => {
-        const track = item.data;
-        const album = track.albumOfTrack;
-        const artist = track.artists.items[0].profile.name;
-        const coverArt = album.coverArt.sources[0].url;
-
-        const songDiv = document.createElement('div');
-        songDiv.classList.add('song');
-
-        // Create a link around the image
-        const link = document.createElement('a');
-        link.href = track.uri;
-        link.target = "_blank"; // Open link in a new tab
-        songDiv.appendChild(link);
-
-        const img = document.createElement('img');
-        img.src = coverArt;
-        img.alt = track.name;
-        img.width = 100;
-        img.height = 100;
-        link.appendChild(img);
-
-        const songName = document.createElement('h3');
-        songName.textContent = track.name;
-
-        const artistName = document.createElement('p');
-        artistName.textContent = `Artist: ${artist}`;
-
-        const button = document.createElement('button');
-        button.textContent = 'Add to Playlist';
-
-        button.dataset.trackid = track.id;
-        button.dataset.songtitle = track.name;
-        button.dataset.songartist = artist;
-
-        button.addEventListener('click', () => {
-            alert(`Track ID: ${button.dataset.trackid}, Song Title: ${button.dataset.songtitle}, Artist: ${button.dataset.songartist}`);
-            document.getElementById("playlistsongtitle").value = button.dataset.songtitle;
-            document.getElementById("playlistsongartist").value = button.dataset.songartist;
-
-            //SAVE THE TRACK ID GLOBALLY - you will need this for other api functionality
-            trackid = button.dataset.trackid;
-
-            $.mobile.changePage("#addtoplaylistpage", { transition: "flip" });
-        });
-
-        songDiv.appendChild(songName);
-        songDiv.appendChild(artistName);
-        songDiv.appendChild(button);
-
-        songResults.appendChild(songDiv);
-    });
-
-    $.mobile.changePage( "#songresultspage", { transition: "flip" }); 
+    chart = document.getElementById('starchart');
+    chart.appendChild(imgtag);
 }
-
-//page load for playlist page
-$(document).on("pageshow","#eventspage", function(){ 
-  
-    alert("Event page loading");
-    //contact the server and get the current events
-
-    //allow the user to choose their event 
-    //SAVE THE EVENTID GLOBALLY IN JAVASCRIPT
-
-});
-
-//page load for playlist page
-$(document).on("pageshow","#playlistpage", function(){ 
-  
-    alert("Playlist page loading");
-    //contact the server and get the playlist results for the current EVENTID
-
-});
