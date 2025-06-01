@@ -1,6 +1,5 @@
 <!DOCTYPE HTML>
 <html>
-
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -13,12 +12,10 @@
   <link rel="stylesheet" href="css/themes/jquery.mobile.icons.min.css" />
   <link rel="stylesheet" href="css/themes/my-custom-theme.css" />
   <link rel="stylesheet" href="css/style.css">
-    
   <script src="lib/jquery/jquery-1.12.4.min.js"></script>
   <script src="lib/jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>
   <script src="lib/myscript.js">
   </script>
-  
 </head>
 
 <body data-gr-c-s-loaded="true" class="ui-mobile-viewport ui-overlay-a" style="" data-feedly-mini="yes">
@@ -26,7 +23,7 @@
  <!-- LOGIN PAGE -->
   <div data-role="page" id="loginpage">
     <div data-role="header" role="banner" class="ui-header ui-bar-inherit">
-      <h1><i class="fa-regular fa-heart"></i> Karaoke Lovers App</h1>
+      <h1><i class="fa-solid fa-star"></i> AstronomyApp</h1>
     </div><!-- /header -->
     <div role="main" class="ui-content"><!-- /main section -->
       <h2>Login</h2>
@@ -34,9 +31,10 @@
       <input type="email" id="email" name="email" required><br>
       <label for="password">Password:</label>
       <input type="password" id="password" name="password" required><br>
-      <input type="button" value="Submit" data-transition="flip" onclick="login();">
-      <p class="helptext">admin@admin, password is admin</p>
+      <input id="loginbutton" type="button" value="Submit" data-transition="flip">
+      <p class="helptext">admin@admin, password is password</p>
       <a href="#registerpage" data-transition="flip" class="ui-btn">Register</a>
+      <a href="#menupage" data-transition="flip" class="ui-btn">Menu</a>
     </div>
   </div>
   <!-- END LOGIN PAGE -->
@@ -44,13 +42,13 @@
   <!-- MENU PAGE -->
   <div data-role="page" id="menupage">
     <div data-role="header" role="banner" class="ui-header ui-bar-inherit">
-      <h1><i class="fa-regular fa-heart"></i> Karaoke Lovers</h1>
+      <h1><i class="fa-solid fa-star"></i> AstronomyApp</h1>
     </div><!-- /header -->
     <div role="main" class="ui-content"><!-- /main section -->
     <h2>Menu</h2>
-      <p><a href="#eventspage" data-transition="flip" class="ui-btn">Karaoke Events</a></p>
-      <p><a href="#searchsongpage" data-transition="flip" class="ui-btn">Search for a Song</a></p>
-      <p><a href="#playlistpage" data-transition="flip" class="ui-btn">Playlist</a></p>
+      <p><a href="#eventspage" data-transition="flip" class="ui-btn">Astronomy Events</a></p>
+      <p><a href="#chartsearchpage" data-transition="flip" class="ui-btn">Search for a star chart</a></p>
+      <p><a href="#loginpage" data-transition="flip" class="ui-btn">Login</a></p>
     </div>
   </div>
   <!-- END MENU PAGE -->
@@ -58,7 +56,7 @@
   <!-- REGISTER PAGE --> <!-- user can see upcoming song meetings and the proposed song -->
   <div data-role="page" id="registerpage">
     <div data-role="header" role="banner" class="ui-header ui-bar-inherit">
-      <h1><i class="fa-regular fa-heart"></i> Karaoke Lovers</h1>
+      <h1><i class="fa-solid fa-star"></i> AstronomyApp</h1>
     </div><!-- /header -->
     <div role="main" class="ui-content"><!-- /main section -->
       <h2>Register</h2>
@@ -67,81 +65,32 @@
     </div>
   </div>
 
-  <!-- EVENTS PAGE --> <!-- user can see upcoming song meetings and the proposed song -->
+  <!-- EVENTS PAGE --> 
   <div data-role="page" id="eventspage">
     <div data-role="header" role="banner" class="ui-header ui-bar-inherit">
-      <h1>Karaoke Lovers</h1>
+      <h1><i class="fa-solid fa-star"></i> AstronomyApp</h1>
     </div><!-- /header -->
     <div role="main" class="ui-content"><!-- /main section -->
-      <h2>Karaoke Events</h2>
+      <h2>Astronomy Events</h2>
       <div id="events"></div> <!-- div to insert song club meetings -->
       <p><a href="#menupage"  data-transition="flip" data-direction="reverse" class="ui-btn">Menu</a></p>
     </div>
   </div>
   <!-- END EVENTS PAGE -->
 
-  <!-- SEARCH SONG PAGE --> <!-- user searchs a song and adds it to the song list -->
-  <div data-role="page" id="searchsongpage">
+
+   <!-- CHART SEARCH --> 
+  <div data-role="page" id="chartsearchpage">
     <div data-role="header" role="banner" class="ui-header ui-bar-inherit">
-      <h1><i class="fa-regular fa-heart"></i> Karaoke Lovers App</h1>
+      <h1><i class="fa-solid fa-star"></i> AstronomyApp</h1>
     </div><!-- /header -->
     <div role="main" class="ui-content"><!-- /main section -->
-      <h2>Search a song</h2>
-      <label for="song">Song Title:</label>
-      <input type="text" id="songtitle" name="songtitle"><br> 
-      <label for="song">Song Artist: </label>
-      <input type="text" id="songartist" name="songartist"><br>
-      <input type="button" name="searchsongbutton" value="Search song" onclick="searchsong();"> <!-- search the API -->
+      <h2>Star Chart</h2>
+      <div id="starchart"></div> <!-- div to display chart -->
       <p><a href="#menupage"  data-transition="flip" data-direction="reverse" class="ui-btn">Menu</a></p>
     </div>
   </div>
-  <!-- END SEARCH SONG -->
-
-
-   <div data-role="page" id="songresultspage">
-    <div data-role="header" role="banner" class="ui-header ui-bar-inherit">
-      <h1><i class="fa-regular fa-heart"></i> Karaoke Lovers</h1>
-    </div><!-- /header -->
-    <div role="main" class="ui-content"><!-- /main section -->
-      <h2>Song Results</h2>
-      <div id="songresults"></div>
-      <p><a href="#menupage"  data-transition="flip" data-direction="reverse" class="ui-btn">Menu</a></p>
-    </div>
-  </div>
-
-  <!-- Playlist page --> <!-- user can see the clubs song list and votes on it -->
-  <div data-role="page" id="playlistpage">
-    <div data-role="header" role="banner" class="ui-header ui-bar-inherit">
-      <h1><i class="fa-regular fa-heart"></i> Karaoke Lovers</h1>
-    </div><!-- /header -->
-    <div role="main" class="ui-content"><!-- /main section -->
-      <h2>Playlist</h2>
-      <div id="playlist"></div>
-      <p><a href="#menupage"  data-transition="flip" data-direction="reverse" class="ui-btn">Menu</a></p>
-    </div>
-  </div>
-  <!-- END PLAYLIST PAGE -->
-
-
-    <!-- SEARCH SONG PAGE --> <!-- user searchs a song and adds it to the song list -->
-  <div data-role="page" id="addtoplaylistpage">
-    <div data-role="header" role="banner" class="ui-header ui-bar-inherit">
-      <h1><i class="fa-regular fa-heart"></i> Karaoke Lovers App</h1>
-    </div><!-- /header -->
-    <div role="main" class="ui-content"><!-- /main section -->
-      <h2>Add to Playlist</h2>
-      <label for="song">Song Title:</label>
-      <input type="text" id="playlistsongtitle" name="songtitle"><br> 
-      <label for="artist">Song Artist: </label>
-      <input type="text" id="playlistsongartist" name="songartist"><br>
-      <label for="performer">Performers: </label>
-      <input type="text" id="performers" name="performers"><br>
-
-      <input type="button" name="addtoplaylistbutton" value="Add to Playlist" onclick="addtoplaylist();"> <!-- search the API -->
-      <p><a href="#menupage"  data-transition="flip" data-direction="reverse" class="ui-btn">Menu</a></p>
-    </div>
-  </div>
-  <!-- END SEARCH SONG -->
+  <!-- END EVENTS PAGE -->
 
   <script src='lib/new_ajax_helper.js'></script>
   <script src='lib/myscript.js'></script>
