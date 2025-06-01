@@ -24,7 +24,6 @@ function onGPSError(position)
 }
 
 // LOGIN CODE
-document.getElementById('loginbutton').onclick = login;
 function login()
 {
     alert("Login button clicked");
